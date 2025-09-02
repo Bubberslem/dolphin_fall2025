@@ -1,5 +1,6 @@
 package app.entities;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,17 +14,26 @@ import java.time.LocalDate;
 @ToString
 @EqualsAndHashCode
 @Entity
-public class Fee
-{
+
+public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
-    private int amount;
-    private LocalDate payDate;
+    private Integer id;
+    @Column(nullable = false)
+    private String note;
+    @Column(nullable = false)
+    private LocalDate created;
+    @Column(nullable = false)
+    private String createdBy;
 
     @ManyToOne
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Setter
     private Person person;
 
+    @PrePersist
+    void prePersist() {
+        this.created = LocalDate.now();
+    }
 }

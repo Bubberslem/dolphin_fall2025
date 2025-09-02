@@ -7,11 +7,11 @@ import jakarta.persistence.OneToOne;
 import lombok.*;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
+@EqualsAndHashCode
 @Entity
 public class PersonDetail
 {
@@ -27,6 +27,8 @@ public class PersonDetail
     @OneToOne
     @MapsId
     @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Setter
     private Person person;
 
     public PersonDetail(String address, int zip, String city, int age)
